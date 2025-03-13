@@ -10,7 +10,27 @@ This is a demonstration of a Next.js application with Prisma ORM, PostgreSQL on 
 - **Type-friendly Prisma Utilities**: Custom utilities with perfect autocompletion
 - **Zod Validation**: Robust API validation with readable error messages
 - **Datadog APM & RUM**: Comprehensive application monitoring
-- **Tailwind CSS**: Utility-first CSS framework for styling
+- **Modern UI**: Clean and responsive design with smooth animations
+
+## Screenshots
+
+### Main Interface
+![Masjid Banking System Interface](public/screenshots/main-interface.png)
+
+The main interface features:
+- Clean, modern design with a responsive layout
+- Interactive masjid selection with smooth animations
+- Detailed view of masjid information
+- Real-time display of banking information and deposits
+
+### Features Showcase
+![Features Showcase](public/screenshots/features.png)
+
+Key features demonstrated:
+- Masjid directory with search functionality
+- Bank account management
+- Deposit tracking
+- Responsive design for all devices
 
 ## Type-friendly Prisma Utility
 
