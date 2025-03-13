@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Masjid model
+model Masjid {
+  id          String   @id @default(cuid())
+  name        String
+  address     String
+  city        String
+  state       String
+  zipCode     String
+  country     String
+  phone       String?
+  email       String?
+  website     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  banks       Bank[]
+}
+
+// Bank model
+model Bank {
+  id          String    @id @default(cuid())
+  name        String
+  accountNumber String
+  routingNumber String?
+  address     String?
+  city        String?
+  state       String?
+  zipCode     String?
+  country     String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  masjid      Masjid    @relation(fields: [masjidId], references: [id])
+  masjidId    String
+  deposits    Deposit[]
+}
+
+// Deposit model
+model Deposit {
+  id          String   @id @default(cuid())
+  amount      Float
+  description String?
+  depositDate DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  bank        Bank     @relation(fields: [bankId], references: [id])
+  bankId      String
+}
