@@ -521,19 +521,33 @@ export default function Home({ masjids }: HomeProps) {
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
     // Use our custom Prisma utility to fetch masjids with banks and their latest deposits
-    const masjids = await findManyMasjidsWithBanksWithLatestDeposit({
+    const masjids = await findManyMasjidsWithBanksWithLatestDeposit<{
+      id: true;
+      name: true;
+      city: true;
+      state: true;
+      address: true;
+      
+    }>({
       select: {
         id: true,
-        name: true,
-        address: true,
-        city: true,
+        name: true, // Fixed: This should be true to match the type and HomeProps
+        address: true, // Uncommented to match HomeProps
+        city: true, // Uncommented to match HomeProps
         state: true,
+        // banks: {
+        //   select: {
+        //     id: true,
+        //     name: true,
+        //     accountNumber: true,
+        //   },
+        // },
       },
       orderBy: {
         name: 'asc',
       },
     });
-
+console.log("masjids => ", masjids)
     return {
       props: {
         masjids: JSON.parse(JSON.stringify(masjids)), // Serialize dates to strings
